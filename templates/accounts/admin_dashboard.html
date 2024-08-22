@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+<p>Welcome, {{ user.username }}!</p>
+
+<div class="dashboard-stats">
+    <h2>System Overview</h2>
+    <p>Total Users: {{ total_users }}</p>
+    <p>Total Stores: {{ total_stores }}</p>
+</div>
+
+<div class="dashboard-actions">
+    <h2>Quick Actions</h2>
+    <ul>
+        <li><a href="{% url 'register' %}">Create New User</a></li>
+        <li><a href="{% url 'user_list' %}">Manage Users</a></li>
+        <!-- Add more admin actions as needed -->
+    </ul>
+</div>
+{% endblock %}

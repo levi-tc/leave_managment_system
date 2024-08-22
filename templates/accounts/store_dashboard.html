@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Store Manager Dashboard</h1>
+<p>Welcome, {{ user.username }}!</p>
+
+<div class="store-info">
+    <h2>Store Information</h2>
+    <p>Store Name: {{ store.name }}</p>
+    <p>Address: {{ store.address }}</p>
+</div>
+
+<div class="employee-list">
+    <h2>Employees</h2>
+    <ul>
+    {% for employee in employees %}
+        <li>{{ employee.username }} - {{ employee.email }}</li>
+    {% empty %}
+        <li>No employees assigned to this store.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="dashboard-actions">
+    <h2>Quick Actions</h2>
+    <ul>
+        <li><a href="{% url 'create_leave_request' %}">Submit Leave Request</a></li>
+        <li><a href="#">Manage Employee Leave Requests</a></li>
+        <!-- Add more store manager actions as needed -->
+    </ul>
+</div>
+{% endblock %}

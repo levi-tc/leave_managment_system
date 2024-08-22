@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Employee Dashboard</h1>
+<p>Welcome, {{ user.username }}!</p>
+
+<div class="leave-requests">
+    <h2>Your Leave Requests</h2>
+    <ul>
+    {% for leave_request in leave_requests %}
+        <li>
+            {{ leave_request.get_leave_type_display }} - 
+            From: {{ leave_request.start_date }} to {{ leave_request.end_date }} - 
+            Status: {{ leave_request.get_status_display }}
+        </li>
+    {% empty %}
+        <li>No leave requests found.</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="dashboard-actions">
+    <h2>Quick Actions</h2>
+    <ul>
+        <li><a href="{% url 'create_leave_request' %}">Submit New Leave Request</a></li>
+        <!-- Add more employee actions as needed -->
+    </ul>
+</div>
+{% endblock %}

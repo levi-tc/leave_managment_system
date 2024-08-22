@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Concedii UNICBRANDS{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 56px - 62px); /* Adjust based on your navbar and footer height */
+    }
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+    .login-card .card-header {
+        background-color: #f8f9fa;
+        border-bottom: none;
+        padding: 20px;
+    }
+    .login-card .card-body {
+        padding: 30px;
+    }
+    .login-card .form-control {
+        border-radius: 10px;
+        padding: 12px;
+    }
+    .login-card .btn-primary {
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: bold;
+    }
+    .login-card .card-footer {
+        background-color: transparent;
+        border-top: none;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card card">
+        <div class="card-header">
+            <h2 class="text-center m-0">Login</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <p class="mb-0">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

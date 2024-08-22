@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Leave Request Details - App-Concedii{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Leave Request Details</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Leave Request for {{ leave_request.user.get_full_name }}</h5>
+        <p class="card-text"><strong>Leave Type:</strong> {{ leave_request.get_leave_type_display }}</p>
+        {% if leave_request.leave_type == 'other' %}
+            <p class="card-text"><strong>Other Leave Type:</strong> {{ leave_request.other_leave_type }}</p>
+        {% endif %}
+        <p class="card-text"><strong>Start Date:</strong> {{ leave_request.start_date }}</p>
+        <p class="card-text"><strong>End Date:</strong> {{ leave_request.end_date }}</p>
+        <p class="card-text"><strong>Return Date:</strong> {{ leave_request.return_date }}</p>
+        <p class="card-text"><strong>Total Days:</strong> {{ leave_request.total_days }}</p>
+        <p class="card-text"><strong>Reason:</strong> {{ leave_request.reason }}</p>
+        <p class="card-text"><strong>Contact During Leave:</strong> {{ leave_request.contact_during_leave }}</p>
+        <p class="card-text">
+            <strong>Status:</strong> 
+            <span class="badge bg-{% if leave_request.status == 'approved' %}success{% elif leave_request.status == 'pending' %}warning{% else %}danger{% endif %}">
+                {{ leave_request.get_status_display }}
+            </span>
+        </p>
+        <p class="card-text"><strong>Submitted on:</strong> {{ leave_request.created_at }}</p>
+        {% if leave_request.updated_at != leave_request.created_at %}
+            <p class="card-text"><strong>Last updated:</strong> {{ leave_request.updated_at }}</p>
+        {% endif %}
+    </div>
+<div class="card-footer">
+    <a href="{% url 'leave_request_list' %}" class="btn btn-secondary">Back to List</a>
+    {% if leave_request.status == 'pending' %}
+        <a href="#" class="btn btn-warning">Edit Request</a>
+        <a href="#" class="btn btn-danger">Cancel Request</a>
+    {% endif %}
+    <a href="{% url 'download_leave_request_pdf' leave_request.pk %}" class="btn btn-primary">Download PDF</a>
+</div>
+</div>
+{% endblock %}

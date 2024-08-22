@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Register New User - App-Concedii{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4">Register New User</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% if form.username.help_text %}
+                    <small class="form-text text-muted">{{ form.username.help_text }}</small>
+                {% endif %}
+                {% for error in form.username.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% if form.user_type.field.widget.input_type != 'hidden' %}
+            <div class="mb-3">
+                {{ form.user_type.label_tag }}
+                {{ form.user_type }}
+                {% if form.user_type.help_text %}
+                    <small class="form-text text-muted">{{ form.user_type.help_text }}</small>
+                {% endif %}
+                {% for error in form.user_type.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if form.store %}
+            <div class="mb-3">
+                {{ form.store.label_tag }}
+                {{ form.store }}
+                {% if form.store.help_text %}
+                    <small class="form-text text-muted">{{ form.store.help_text }}</small>
+                {% endif %}
+                {% for error in form.store.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="mb-3">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {% if form.password1.help_text %}
+                    <small class="form-text text-muted">{{ form.password1.help_text }}</small>
+                {% endif %}
+                {% for error in form.password1.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% if form.password2.help_text %}
+                    <small class="form-text text-muted">{{ form.password2.help_text }}</small>
+                {% endif %}
+                {% for error in form.password2.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
