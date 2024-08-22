@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('leave/', include('leave_management.urls')),
     path('accounts/', include('accounts.urls')),
+    path('stores/', include('stores.urls')),
     
     path('', RedirectView.as_view(url=reverse_lazy('login')), name='root'),
     # Add other app URLs here
